@@ -16,8 +16,14 @@ describe('Orange HRM Tests', () => {
     userOtherId : ".oxd-input--active",
     userDriveLicense : ".oxd-input--active",
     userDateLicenseExpire: "[placeholder='yyyy-dd-mm']",
-    userNationality: "[tabindex='0']",
-    dateCloseButton:'.--close'
+    userDateOfBirth : "[placeholder='yyyy-dd-mm']",
+    userNationality: '.oxd-select-text-input',
+    selectMultipleNacionality : '.oxd-select-dropdown > :nth-child(3)',
+    dateCloseButton:'.--close',
+    userMaritalState: '.oxd-select-text-input',
+    selectMaritalState : ':nth-child(4) > span',
+    userGender : '.oxd-radio-wrapper',
+    submitButton: ".orangehrm-left-space"
     
    }
 
@@ -38,8 +44,17 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorList.userDriveLicense).eq(5).clear().type('Drive')
      cy.get(selectorList.userDateLicenseExpire).eq(0).clear().type('2025-01-12')
      cy.get(selectorList.dateCloseButton).click()
-     cy.get(selectorList.userNationality).eq(0).type(':nth-child(3) > span')
-     
+     cy.get(selectorList.userDateOfBirth).eq(1).clear().type('2025-01-12')
+     cy.get(selectorList.dateCloseButton).click()
+     cy.get(selectorList.userNationality).eq(0).click()
+     cy.get(selectorList.selectMultipleNacionality).click()
+     cy.get(selectorList.userMaritalState).eq(1).click()
+     cy.get(selectorList.selectMaritalState).click()
+     cy.get(selectorList.userGender).eq(1).click()
+    
+    cy.get(selectorList.submitButton).eq(0).click({force:true})
+    cy.get('body').should('contain','Successfully Updated')
+    cy.get('.oxd-toast-close')
 
   })
 
