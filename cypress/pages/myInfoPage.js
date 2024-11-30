@@ -21,24 +21,36 @@ class Myinfopage {
         }
         return selectors
     }
-     
-    fillFieldMyInfo() {
 
-        cy.get(this.selectorList().userFirtsName).clear().type("NAVAL")
-        cy.get(this.selectorList().userLastName).clear().type("LAST")
-        cy.get(this.selectorList().userEmployerId).eq(3).clear().type('Employer')
-        cy.get(this.selectorList().userOtherId).eq(4).clear().type('Other')
-        cy.get(this.selectorList().userDriveLicense).eq(5).clear().type('Drive')
-        cy.get(this.selectorList().userDateLicenseExpire).eq(0).clear().type('2025-01-12')
+    fillFullName(firstName,lastName) {
+
+        cy.get(this.selectorList().userFirtsName).clear().type(firstName)
+        cy.get(this.selectorList().userLastName).clear().type(lastName)
+    }
+
+    fillEmployeer(employeeId,otherId,driveLicense,dataExpire,dataOfBirth){
+
+        cy.get(this.selectorList().userEmployerId).eq(3).clear().type(employeeId)
+        cy.get(this.selectorList().userOtherId).eq(4).clear().type(otherId)
+        cy.get(this.selectorList().userDriveLicense).eq(5).clear().type(driveLicense)
+        cy.get(this.selectorList().userDateLicenseExpire).eq(0).clear().type(dataExpire)
         cy.get(this.selectorList().dateCloseButton).click()
-        cy.get(this.selectorList().userDateOfBirth).eq(1).clear().type('2025-01-12')
+        cy.get(this.selectorList().userDateOfBirth).eq(1).clear().type(dataOfBirth)
         cy.get(this.selectorList().dateCloseButton).click()
+    }
+    
+
+    fillStatus(){
+        cy.get(this.selectorList().userGender).eq(1).click()
         cy.get(this.selectorList().userNationality).eq(0).click()
         cy.get(this.selectorList().selectMultipleNacionality).click()
         cy.get(this.selectorList().userMaritalState).eq(1).click()
         cy.get(this.selectorList().selectMaritalState).click()
-        cy.get(this.selectorList().userGender).eq(1).click()
         
+    }
+
+    saveInfo() {
+       
         cy.get(this.selectorList().submitButton).eq(0).click({force:true})
         cy.get('body').should('contain','Successfully Updated')
         cy.get('.oxd-toast-close')
